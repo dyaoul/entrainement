@@ -11,11 +11,31 @@ From an architecture setup, ideally we would like to have 3 main components:
    - node.js simple interface to interface with a blockchain
    - smart contracts on the blockchain
    
-Note: For simplicity, we decided to exclude the trusted setup allowing to create a proof. This choice was made to avoid deployment complexity created by the zk-snarks trusted setup constraints. The following chapters will go in detail in how to setup locally, but do not share the deployed version to facilitate the testing. 
+Note: For simplicity, we decided to exclude the trusted setup allowing to create a proof. This choice was made to avoid deployment complexity created by the zk-snarks trusted setup constraints. The following chapters will go in detail in how to setup locally, but do not share the deployed version to facilitate testing. 
 
 How to set it up?
 
-Zokrates
+The difficulty in the setup here resides in the pre-liminary required setup phase of zokrates to compile the high level code, create the trusted setup, export code into a solidity smart contract, generate a witness and finally generate a proof. To ease setup and have no dependencies, we recommend to use Zokrates docker image. All the following steps are required to run locally and shall be done before any blockchain interaction. Local or deployed. 
+
+Steps (host OS):
+   - docker run -it --name zokrates -v ~/Work/consensys-project/zokrates/:/home/zokrates/code zokrates/zokrates // the local mount point is used to share zokrates code inside the container. MAke sure you use your local path.
+Steps (in container):
+   - cd code // move where all the code is
+   - ../zokrates compile --input consensys.zok // generates out and out.ztf 
+   - ../zokrates setup // generates proving and verifying key
+   - ../zokrates export-verifier // generates the xmart code auto generated code
+   - ../zokrates compute-witness -a 1 2 3 4 1 2 3 5 // Generate the witness: false result
+   - ../zokrates compute-witness -a 1 2 3 4 1 2 3 4 // Generate the witness: true result
+   - ../zokrates generate-proof // generates a proof.json output that will be used later
+At this point our whole zk-snark validation process is created and just need to be deployed. 
+
+The second set required is to deploy and configure the smart contract on the blockchain. We are going to follow a ganache-cli install for simplicity - jusy make sure it's running and truffle is properly configured. Current config is to be used with ganache running on port 8545. 
+
+The solidity is setup using two different contracts:
+   - MastermindPrize: main logic to interface with the zk-snark verifier. The contract extends OpenZeppelin libs to facilitate the prize management via ERC721 token and Ownable interface for security - we do not want any user to be able to change the verifier.
+   - Mastermindverifier: zk-snark validator. (Name was modified from its original verifier.sol). We want this to be as dynamic as possible to improve in the future, so users shall not need to interact with the same directly.
+   
+ To deploy the smart contract on the blockchain, use the normal truffle migrate (--reset) command. The same shall be deployed 
 
 
 Run a local development server
