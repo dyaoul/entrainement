@@ -33,9 +33,24 @@ The second set required is to deploy and configure the smart contract on the blo
 
 The solidity is setup using two different contracts:
    - MastermindPrize: main logic to interface with the zk-snark verifier. The contract extends OpenZeppelin libs to facilitate the prize management via ERC721 token and Ownable interface for security - we do not want any user to be able to change the verifier.
-   - Mastermindverifier: zk-snark validator. (Name was modified from its original verifier.sol). We want this to be as dynamic as possible to improve in the future, so users shall not need to interact with the same directly.
+   - MastermindVerifier: zk-snark validator. (Name was modified from its original verifier.sol). We want this to be as dynamic as possible to improve in the future, so users shall not need to interact with the same directly.
    
- To deploy the smart contract on the blockchain, use the normal truffle migrate (--reset) command. The same shall be deployed 
-
-
+ To deploy the smart contract on the blockchain, use the normal truffle migrate (--reset) command. Once completed, the two smart contracts shal be deployed but we still need to configure the verifier address in the MastermindPrize contract. Without performing such task, you will get ugly RPC errors! The easiest and fastest way to deploy the contract is to use the truffle console and perform the following:
+    - var mp = await MastermindPrize.at(MastermindPrize.address)
+    - mp.address // will return the address of the MastermindPrize deployed
+    - var mv = await MastermindVerifier.at(MastermindVerifier.address)
+    - mv.address // will return the address of the MastermindVerifier deployed
+    - mp.setVerifierAddress('0x619fEfC7d0D0056428c72E446e22B82898b1C337') // where 0x619fEfC7d0D0056428c72E446e22B82898b1C337 is the local address of the MastermindVerifier contract
+    
+After completion of this step, the setup is completed. 
+ 
 Run a local development server
+
+To start the server locally, go inside the consensys-app folder and run the usual npm start command to launch the web interface. Depending on your computer, you should have a web page open on http://locahost:3000. Open manually if needed. Make sure you use a metamask compatible browser like Chrome.
+
+Flow:
+   - when you open the app for the first time, you will be asked to allow access to metamask by the web app. Please accept. 
+   - once you are connected, the UI shall show three account specific values: the account[0] address, the current balance in ether and the balence in tokens received. The first time, the balance of tokens shall be 0.
+   - As you click on submit, you will see the metamask popup asking to sign the transaction. If confirmed, the balance prize shall increase by one each time you press on submit. 
+   
+Note: in a certification like flow, we would require to get only one prize per exam. Here, we prefered to allow this value to increase to be able to perform more tests.
