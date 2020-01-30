@@ -1,7 +1,5 @@
 ##  ConsenSys Academy’s 2019 Developer Bootcamp Final Project 
 
-***
-
 ## What does your project do?
 
 The goal is this project was to use the Zokrates framework and create a custom protocol based on zk-snarks to prize (non fungible ERC721) users completing a pre-defined tasks. This concept could be easily enhanced and be used in a certification flow process in industries like aeropspace, banking, online universities, engineering after completion of an exam. The value proposition of such solution/framework is inherent to the nature of the blockchain (public access and immutable) but also with the ZKP capabilities to subsitute a manual and tamperable process with a fully automated and secure process. 
@@ -14,8 +12,6 @@ From an architecture setup, ideally we would like to have 3 main components:
 * smart contracts on the blockchain
    
 Note: For simplicity, we decided to exclude the trusted setup allowing to create a proof. This choice was made to avoid deployment complexity created by the zk-snarks trusted setup constraints. The following chapters will go in detail in how to setup locally, but do not share the deployed version to facilitate testing. 
-
-***
 
 ## How to set it up?
 
@@ -48,10 +44,8 @@ The solidity is setup using two different contracts:
 * mp.setVerifierAddress('0x619fEfC7d0D0056428c72E446e22B82898b1C337') // where 0x619fEfC7d0D0056428c72E446e22B82898b1C337 is the local address of the MastermindVerifier contract
     
 After completion of this step, the setup is completed. 
- 
-***
 
-Run a local development server?
+## Run a local development server?
 
 To start the server locally, go inside the consensys-app folder and run the usual npm start command to launch the web interface. Depending on your computer, you should have a web page open on http://locahost:3000. Open manually if needed. Make sure you use a metamask compatible browser like Chrome.
 
