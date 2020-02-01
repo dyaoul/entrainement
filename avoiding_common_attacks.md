@@ -1,4 +1,4 @@
-Measures against to common attacks:
+## Avoiding common attacks:
 
 * No loops
 * Use OpenZeppelin battle tested libraries for the Ownable piece.
