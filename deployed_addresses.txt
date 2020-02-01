@@ -1,0 +1,96 @@
+Smart contract deployed on Ropsten:
+
+truffle migrate --reset --network ropsten
+
+Compiling your contracts...
+===========================
+> Everything is up to date, there is nothing to compile.
+
+
+
+Starting migrations...
+======================
+> Network name:    'ropsten'
+> Network id:      3
+> Block gas limit: 0x7a1200
+
+
+1_initial_migration.js
+======================
+
+   Deploying 'Migrations'
+   ----------------------
+   > transaction hash:    0x499acdab229f47120180c8c0e909889526064130dbd08c76305f58c43c19c77e
+   > Blocks: 0            Seconds: 8
+   > contract address:    0xC03D857BF648a9E647F6d350350ADc43230f866C
+   > block number:        7244599
+   > block timestamp:     1580598394
+   > account:             0x758B9D54703910C18F217e24d0C49E8BC92b5777
+   > balance:             1.4967165
+   > gas used:            164175
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.0032835 ETH
+
+   Pausing for 2 confirmations...
+   ------------------------------
+   > confirmation number: 1 (block: 7244600)
+   > confirmation number: 2 (block: 7244601)
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:           0.0032835 ETH
+
+
+2_consensys_migration.js
+========================
+
+   Deploying 'MastermindPrize'
+   ---------------------------
+   > transaction hash:    0x1804a1999a3906b3c757aa664c0d734fccc503193cf268a69fc1b41fed8310a2
+   > Blocks: 0            Seconds: 36
+   > contract address:    0x520553ec28ace8fA70211eeF6640fbD39B10B36e
+   > block number:        7244603
+   > block timestamp:     1580598504
+   > account:             0x758B9D54703910C18F217e24d0C49E8BC92b5777
+   > balance:             1.44091586
+   > gas used:            2747691
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.05495382 ETH
+
+   Pausing for 2 confirmations...
+   ------------------------------
+   > confirmation number: 1 (block: 7244604)
+   > confirmation number: 2 (block: 7244605)
+
+   Deploying 'MastermindVerifier'
+   ------------------------------
+   > transaction hash:    0xb8e9d6088604de0e6810dba2f19b89fc84f8c10ba58a4093bdf5e089ed045713
+   > Blocks: 1            Seconds: 4
+   > contract address:    0x0c4a724Fb81094Ae7356e2cbB9281d4708800bC5
+   > block number:        7244607
+   > block timestamp:     1580598580
+   > account:             0x758B9D54703910C18F217e24d0C49E8BC92b5777
+   > balance:             1.41959604
+   > gas used:            1065991
+   > gas price:           20 gwei
+   > value sent:          0 ETH
+   > total cost:          0.02131982 ETH
+
+   Pausing for 2 confirmations...
+   ------------------------------
+   > confirmation number: 1 (block: 7244608)
+   > confirmation number: 3 (block: 7244610)
+
+   > Saving migration to chain.
+   > Saving artifacts
+   -------------------------------------
+   > Total cost:          0.07627364 ETH
+
+
+Summary
+=======
+> Total deployments:   3
+> Final cost:          0.07955714 ETH
