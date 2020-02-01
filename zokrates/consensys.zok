@@ -1,0 +1,41 @@
+def checkCorrect(field proposed, field real) -> (field):
+  return if proposed == real then 1 else 0 fi
+
+def checkIncorrect(field proposed, field[4] real, field position) -> (field):
+  field color_match_found = 0
+
+  for field j in 0..4 do
+    color_match_found = color_match_found + if proposed == real[j] then 1 else 0 fi
+  endfor
+
+  return color_match_found
+
+def main(field[4] proposed_color, private field[4] real_color) -> (bool):
+  field correct_places_colors = 0
+  field incorrect_places_colors = 0
+
+  field[16] color_real_array = [0 ;16]
+  field[16] color_proposed_array = [0 ;16]
+  field[16] color_matches_array = [0 ;16]
+  field[16] color_unmatches_array = [0 ;16]
+
+  for field i in 0..4 do
+    // Increase proposed colors & real colors
+    color_proposed_array[proposed_color[i]] = color_proposed_array[proposed_color[i]] + 1
+    color_real_array[real_color[i]] = color_real_array[real_color[i]] + 1
+
+    // Check for correct positions
+    field correct = checkCorrect(proposed_color[i], real_color[i])
+    color_matches_array[proposed_color[i]] = color_matches_array[proposed_color[i]] + correct
+
+    // Check for incorrect positions
+    field incorrect = checkIncorrect(proposed_color[i], real_color, i)
+    color_unmatches_array[proposed_color[i]] = incorrect - correct
+  endfor
+
+  for field i in 0..16 do
+    correct_places_colors = correct_places_colors + color_matches_array[i]
+    incorrect_places_colors = incorrect_places_colors + color_unmatches_array[i]
+  endfor
+
+  return correct_places_colors == 4
