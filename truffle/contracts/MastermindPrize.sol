@@ -40,6 +40,7 @@ contract MastermindPrize is Ownable, ERC721Enumerable, ERC721Metadata("Mastermin
           uint[5] memory input
       ) public {
       // ZPK verification
+      require(contractMastermindVerifier != address(0x0), "Verifier contract shall be assigned");
       bool result = MastermindVerifier(contractMastermindVerifier).verifyTx(a, b, c, input);
       require(result, "Incorrect solution");
 

@@ -21,6 +21,7 @@ class App extends Component {
       balance: null,
       wins: null,
       proof: JSON.stringify(PRIZE_PROOF),
+      proposed: JSON.stringify(PRIZE_PROOF),
     };
   }
 
@@ -85,12 +86,16 @@ class App extends Component {
     });;
   }
 
+  handleChange(event) {
+    this.setState({ proposed: event.target.value });
+  }
+
   async submitProof(event) {
     console.log('Submitting proof...');
     let currentComponent = this;
-    const {account, proof} = this.state;
+    const {account, proposed} = this.state;
 
-    let proofArray = proof.match(/0x[0-9A-F]+/ig);
+    let proofArray = proposed.match(/0x[0-9A-F]+/ig);
     let A = [proofArray[0], proofArray[1]];
     let B = [[proofArray[2], proofArray[3]],[proofArray[4], proofArray[5]]];
     let C = [proofArray[6], proofArray[7]];
@@ -123,7 +128,7 @@ class App extends Component {
             <p>Your account: {account}</p>
             <p>Your balance: {balance}</p>
             <h3>Your wins: {wins}</h3>
-            <textarea rows="10" cols="200" id="proof-input" defaultValue={proof}></textarea>
+            <textarea rows="10" cols="200" id="proof-input" onChange={e => this.handleChange(e)} defaultValue={proof}></textarea>
             <br/>
             <button className="action-button" id="action-button" onClick={e => this.submitProof(e)}>Submit</button>
           </div>
